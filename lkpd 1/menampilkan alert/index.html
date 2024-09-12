@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hitung Mundur</title>
+  <style>
+    #alert-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #3e8e41;
+    }
+    .button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="alert-box" style="display: none;"></div>
+  <h1 style="text-align: center;">Hitung Mundur</h1>
+  <div style="text-align: center; margin-bottom: 20px;">
+    <p id="waktu" style="font-size: 48px; font-weight: bold;">Waktu tersisa: 10</p>
+  </div>
+  <div class="button-container">
+    <button id="mulai" class="button">Mulai</button>
+    <button id="berhenti" class="button" disabled>Berhenti</button>
+  </div>
+
+  <script>
+    const mulaiButton = document.getElementById('mulai');
+    const berhentiButton = document.getElementById('berhenti');
+    const alertBox = document.getElementById('alert-box');
+    const waktuElement = document.getElementById('waktu');
+
+    let waktu = 10;
+    let interval;
+
+    function updateWaktu() {
+      waktuElement.innerHTML = `Waktu tersisa: ${waktu === 1 ? '1 detik' : waktu}`;
+    }
+
+    function toggleTimer(state) {
+      alertBox.style.display = state ? 'block' : 'none';
+      mulaiButton.disabled = state;
+      berhentiButton.disabled = !state;
+      if (state) {
+        interval = setInterval(() => {
+          waktu > 1 ? waktu-- : (clearInterval(interval), alertBox.style.display = 'none', alert('Waktu habis!'));
+          updateWaktu();
+        }, 1000);
+      } else {
+        clearInterval(interval);
+        waktu = 10;
+        updateWaktu();
+      }
+    }
+
+    mulaiButton.addEventListener('click', () => toggleTimer(true));
+    berhentiButton.addEventListener('click', () => toggleTimer(false));
+  </script>
+</body>
+</html>

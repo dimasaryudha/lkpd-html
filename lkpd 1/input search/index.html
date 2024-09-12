@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mencari Data Tanggal</title>
+  <style>
+    .search-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .search-input {
+      padding: 10px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 50%;
+    }
+    .search-button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .search-button:hover {
+      background-color: #3e8e41;
+    }
+    .result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="center">Mencari Data</h1>
+  <div class="search-container">
+    <input type="date" id="search-input" class="search-input">
+    <button id="search-button" class="search-button">Search</button>
+  </div>
+  <div id="result" class="result"></div>
+
+  <script>
+    //dom
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const resultElement = document.getElementById('result');
+
+    //listener
+    searchButton.addEventListener('click', () => {
+      const searchDate = searchInput.value;
+      resultElement.innerHTML = `Mencari data tanggal: ${searchDate}`;
+    });
+  </script>
+</body>
+</html>
